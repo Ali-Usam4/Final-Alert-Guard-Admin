@@ -29,9 +29,9 @@ class _SplashPageState extends State<SplashPage> {
         listener: (context, state) {
           if (state.status == Status.authenticated) {
             context.read<UserCubit>().loadUser();
-            NavRouter.pushAndRemoveUntil(context, LoginPage());
+            //NavRouter.pushAndRemoveUntil(context, const LoginPage());
           } else if (state.status == Status.unauthenticated) {
-            //NavRouter.pushAndRemoveUntil(context, const StartupPage());
+            NavRouter.pushAndRemoveUntil(context, const LoginPage());
           }
         },
         child: BaseScaffold(

@@ -18,7 +18,7 @@ class FinalAlertGuardWeb extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             navigatorKey: NavRouter.navigationKey,
-            title: 'Oil Change',
+            title: 'Final Alert Guard',
             debugShowCheckedModeBanner: false,
             theme: darkTheme,
             themeMode: ThemeMode.light,

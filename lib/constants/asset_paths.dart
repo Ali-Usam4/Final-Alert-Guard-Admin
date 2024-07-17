@@ -1,20 +1,17 @@
 class AssetPaths {
   ///* ================ Fonts ================ *///
-  static const String lateefFont = 'Lateef';
-
-  ///* ================ Path ================ *///
-
-  static const String pngPath = 'assets/png';
-  static const String svgPath = 'assets/svg';
+  static const String poppins = 'Poppins';
 
   ///* ================ Logo ================ *///
 
-  static const String pngLogo = '$pngPath/logoPng.png';
-  static const String svgLogo = '$svgPath/logo.svg';
+  static const String logo = 'assets/images/ic_logo.png';
+  static const String loginLogo = 'assets/images/ic_logo_login.png';
+  static const String dashboardLogo = 'assets/images/ic_logo_dashboard.png';
 
-  ///* ================ NavBar ================ *///
+  ///* ================ Home ================ *///
 
-  static const String home = '$svgPath/navbar/ic_home.svg';
-  static const String notifications = '$svgPath/navbar/ic_notifications.svg';
-  static const String settings = '$svgPath/navbar/ic_settings.svg';
+  static const String ic_dashboard = 'assets/icons/ic_dashboard.svg';
+  static const String ic_company = 'assets/icons/ic_company.svg';
+  static const String ic_users = 'assets/icons/ic_users.svg';
+  static const String ic_logout = 'assets/icons/ic_logout.svg';
 }

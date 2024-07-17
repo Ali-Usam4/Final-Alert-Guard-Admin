@@ -8,8 +8,8 @@ import '../ui/widgets/unfocus.dart';
 import 'bloc/bloc_di.dart';
 import 'cubit/app_cubit.dart';
 
-class OilChangeApp extends StatelessWidget {
-  const OilChangeApp({super.key});
+class FinalAlertGuardWeb extends StatelessWidget {
+  const FinalAlertGuardWeb({super.key});
 
   @override
   Widget build(BuildContext context) {

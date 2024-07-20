@@ -16,9 +16,9 @@ import '../../constants/asset_paths.dart';
 
 final darkTheme = _getTheme();
 
-const _primary = Color(0xFF924506);
-const _light = Colors.blueGrey;
-const _secondary = Colors.amber;
+const _primary = Color(0xFF0096EB);
+const _secondary = Color(0xFF4D5E80);
+const _light = Color(0xFFCBD5E1);
 
 const _background = Color(0xFF121212);
 const _light1 = Colors.white;
@@ -282,21 +282,21 @@ TextTheme _getTextTheme(ColorScheme colorScheme) {
     // Headline
     headlineLarge: TextStyle(
       fontSize: 24,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: headlineHeight,
       color: headlineColor,
       fontWeight: headlineWeight,
     ),
     headlineMedium: TextStyle(
       fontSize: 20,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: headlineHeight,
       color: headlineColor,
       fontWeight: headlineWeight,
     ),
     headlineSmall: TextStyle(
       fontSize: 18,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: headlineHeight,
       color: headlineColor,
       fontWeight: headlineWeight,
@@ -305,21 +305,21 @@ TextTheme _getTextTheme(ColorScheme colorScheme) {
     // Title
     titleLarge: TextStyle(
       fontSize: 18,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: titleHeight,
       color: titleColor,
       fontWeight: titleWeight,
     ),
     titleMedium: TextStyle(
       fontSize: 16,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: titleHeight,
       color: titleColor,
       fontWeight: titleWeight,
     ),
     titleSmall: TextStyle(
       fontSize: 14,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: titleHeight,
       color: titleColor,
       fontWeight: titleWeight,
@@ -328,21 +328,21 @@ TextTheme _getTextTheme(ColorScheme colorScheme) {
     // Body
     bodyLarge: TextStyle(
       fontSize: 16,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: bodyHeight,
       color: bodyColor,
       fontWeight: bodyWeight,
     ),
     bodyMedium: TextStyle(
       fontSize: 14,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: bodyHeight,
       color: bodyColor,
       fontWeight: bodyWeight,
     ),
     bodySmall: TextStyle(
       fontSize: 12,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: bodyHeight,
       color: bodyColor,
       fontWeight: bodyWeight,
@@ -351,21 +351,21 @@ TextTheme _getTextTheme(ColorScheme colorScheme) {
     // Label
     labelLarge: TextStyle(
       fontSize: 14,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: bodyHeight,
       color: labelColor,
       fontWeight: bodyWeight,
     ),
     labelMedium: TextStyle(
       fontSize: 12,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: bodyHeight,
       color: labelColor,
       fontWeight: bodyWeight,
     ),
     labelSmall: TextStyle(
       fontSize: 11,
-      fontFamily: AssetPaths.lateefFont,
+      fontFamily: AssetPaths.poppins,
       height: bodyHeight,
       color: labelColor,
       fontWeight: bodyWeight,

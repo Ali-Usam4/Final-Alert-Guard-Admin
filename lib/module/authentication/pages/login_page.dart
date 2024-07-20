@@ -145,69 +145,150 @@
 //   }
 // }
 
+import 'package:final_alert_guard_admin/module/authentication/cubit/login/login_cubit.dart';
+import 'package:final_alert_guard_admin/ui/input/input_field.dart';
+import 'package:final_alert_guard_admin/ui/widgets/primary_button.dart';
+import 'package:final_alert_guard_admin/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/di/service_locator.dart';
+import '../../../ui/widgets/base_scaffold.dart';
+import '../../../utils/validators/validators.dart';
+import '../models/login_input.dart';
+import '../widget/password_suffix_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Calculate screen size
-    final Size screenSize = MediaQuery.of(context).size;
-
-    // Determine text field width based on screen size
-    double textFieldWidth = screenSize.width > 600 ? 400 : screenSize.width * 0.8;
-
-    return Scaffold(
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.all(32.0),
-          constraints: BoxConstraints(maxWidth: 600), // Limit width for better readability
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Your logo image goes here
-              Image.asset(
-                'assets/logo.png', // Replace with your logo asset path
-                width: 150,
-              ),
-              SizedBox(height: 24.0),
-              Container(
-                width: textFieldWidth,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter your username',
-                    labelText: 'Username',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              SizedBox(height: 12.0),
-              Container(
-                width: textFieldWidth,
-                child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your password',
-                    labelText: 'Password',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              SizedBox(height: 24.0),
-              Container(
-                width: textFieldWidth,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Add login functionality here
-                  },
-                  child: Text('Login'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    return BlocProvider(
+      create: (context) => LoginCubit(authRepository: sl()),
+      child: const LoginPageView(),
     );
+  }
+}
+
+class LoginPageView extends StatefulWidget {
+  const LoginPageView({super.key});
+
+  @override
+  State<LoginPageView> createState() => _LoginPageViewState();
+}
+
+class _LoginPageViewState extends State<LoginPageView> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        /**/
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return BaseScaffold(
+          body: Center(
+            child: Container(
+              height: height * 0.7,
+              width: width * 0.5,
+              padding: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Image.asset(
+                      'assets/images/ic_logo_login.png',
+                      height: height * 0.3,
+                    ),
+                  ),
+                  SizedBox(width: width * 0.050),
+                  Expanded(
+                    flex: 2,
+                    child: Form(
+                      key: _formKey,
+                      autovalidateMode: state.isAutoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Login',
+                            style: context.textTheme.titleLarge?.copyWith(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: height * 0.04),
+                          InputField(
+                            controller: _emailController,
+                            label: 'Email',
+                            title: 'Email',
+                            textInputAction: TextInputAction.done,
+                            validator: (val) => Validators.email(val),
+                          ),
+                          SizedBox(
+                            height: height * 0.03,
+                          ),
+                          InputField(
+                            controller: _passwordController,
+                            label: 'Password',
+                            title: "Password",
+                            textInputAction: TextInputAction.done,
+                            suffixIcon: PasswordSuffixIcon(
+                              isPasswordVisible: !state.isPasswordHidden,
+                              onTap: () {
+                                context.read<LoginCubit>().toggleShowPassword();
+                              },
+                            ),
+                            validator: (value) => Validators.password(
+                              value,
+                            ),
+                            obscureText: state.isPasswordHidden,
+                          ),
+                          SizedBox(
+                            height: height * 0.04,
+                          ),
+                          PrimaryButton(
+                            onPressed: _onLoggedIn,
+                            title: 'Login',
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _onLoggedIn() {
+    if (_formKey.currentState!.validate()) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      LoginInput loginInput = LoginInput(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+      //context.read<LoginCubit>().login(loginInput);
+      //NavRouter.pushAndRemoveUntil(context, const DashboardPage());
+    } else {
+      context.read<LoginCubit>().enableAutoValidateMode();
+    }
   }
 }

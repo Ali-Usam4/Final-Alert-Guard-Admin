@@ -1,3 +1,4 @@
+import 'package:final_alert_guard_admin/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends StatelessWidget {
@@ -29,7 +30,7 @@ class BaseScaffold extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.white,
+      color: AppColors.lightGrey,
       child: Scaffold(
         key: key,
         extendBody: extendBody,

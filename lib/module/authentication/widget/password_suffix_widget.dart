@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../../../../constants/constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PasswordSuffixIcon extends StatelessWidget {
   const PasswordSuffixIcon({
-    Key? key,
+    super.key,
     required this.isPasswordVisible,
     required this.onTap,
-  }) : super(key: key);
+  });
+
   final bool isPasswordVisible;
   final VoidCallback onTap;
 
@@ -16,13 +16,7 @@ class PasswordSuffixIcon extends StatelessWidget {
     return IconButton(
       onPressed: onTap,
       splashRadius: 20,
-      icon: Icon(
-        isPasswordVisible
-            ? Icons.visibility_outlined
-            : Icons.visibility_off_outlined,
-        color: AppColors.primaryOrange,
-        size: 24,
-      ),
+      icon: isPasswordVisible ? SvgPicture.asset('assets/icons/ic_show_password.svg') : SvgPicture.asset('assets/icons/ic_hide_password.svg'),
     );
   }
 }

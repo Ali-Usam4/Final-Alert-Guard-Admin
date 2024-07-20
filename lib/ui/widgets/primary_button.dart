@@ -9,15 +9,15 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     required this.title,
     this.hMargin = 0,
-    this.height = 50,
+    this.height = 46,
     this.width = double.infinity,
     this.backgroundColor,
     this.titleColor = Colors.white,
-    this.borderColor = const Color(0xFF44C8F5),
+    this.borderColor = Colors.transparent,
     this.fontWeight = FontWeight.bold,
-    this.fontSize = 24,
+    this.fontSize = 13,
     this.fontWidget,
-    this.borderRadius = 5,
+    this.borderRadius = 10,
   });
 
   final String title;
@@ -48,21 +48,16 @@ class PrimaryButton extends StatelessWidget {
           ),
           backgroundColor: backgroundColor ?? context.colorScheme.primary,
         ),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: context.textTheme.titleLarge?.copyWith(
-                  fontWeight: fontWeight,
-                  color: titleColor,
-                  fontSize: fontSize,
-                ),
-              ),
+        child: Center(
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: context.textTheme.titleLarge?.copyWith(
+              fontWeight: fontWeight,
+              color: titleColor,
+              fontSize: fontSize,
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -70,20 +65,21 @@ class PrimaryButton extends StatelessWidget {
 }
 
 class PrimaryOutlineButton extends StatelessWidget {
-  const PrimaryOutlineButton(
-      {super.key,
-      required this.onPressed,
-      required this.title,
-      this.hMargin = 0,
-      this.height = 50,
-      this.width = double.infinity,
-      this.backgroundColor,
-      this.titleColor = AppColors.primaryOrange,
-      this.borderColor = AppColors.primaryOrange,
-      this.fontWeight = FontWeight.w600,
-      this.fontSize = 24,
-      this.fontWidget,
-      this.borderRadius = 8});
+  const PrimaryOutlineButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+    this.hMargin = 0,
+    this.height = 50,
+    this.width = double.infinity,
+    this.backgroundColor,
+    this.titleColor = Colors.white,
+    this.borderColor = AppColors.secondary,
+    this.fontWeight = FontWeight.w600,
+    this.fontSize = 24,
+    this.fontWidget,
+    this.borderRadius = 8,
+  });
 
   final String title;
   final VoidCallback onPressed;

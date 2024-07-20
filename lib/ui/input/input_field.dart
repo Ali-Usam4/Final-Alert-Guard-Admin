@@ -1,3 +1,4 @@
+import 'package:final_alert_guard_admin/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,6 +10,7 @@ class InputField extends StatefulWidget {
   const InputField({
     required this.controller,
     required this.label,
+    required this.title,
     required this.textInputAction,
     this.keyboardType = TextInputType.text,
     this.validator,
@@ -25,19 +27,20 @@ class InputField extends StatefulWidget {
     this.autoFocus = false,
     super.key,
     this.onChange,
-    this.borderColor = AppColors.primaryOrange,
+    this.borderColor = AppColors.secondary,
     this.borderRadius = 8,
     this.fontSize = 24,
     this.boxConstraints = 44,
     this.fontWeight = FontWeight.w400,
     this.horizontalPadding = 20,
-    this.verticalPadding = 8,
+    this.verticalPadding = 16,
     this.suffixIconTopPadding = 16,
     this.suffixIconRightPadding = 16,
   });
 
   final TextEditingController controller;
   final String label;
+  final String title;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final FormFieldValidator<String>? validator;
@@ -72,82 +75,106 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     final validator = widget.validator ?? Validators.getValidator(widget.keyboardType);
 
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: widget.controller,
-          keyboardType: widget.keyboardType,
-          textInputAction: widget.textInputAction,
-          obscureText: widget.obscureText,
-          validator: validator,
-          enabled: true,
-          onTap: widget.onTap,
-          autofocus: widget.autoFocus,
-          readOnly: widget.readOnly,
-          inputFormatters: widget.inputFormatters,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          maxLines: widget.maxLines,
-          onChanged: widget.onChange,
-          style: const TextStyle(
-            fontSize: 22,
-          ),
-          decoration: InputDecoration(
-            hintText: widget.label,
-            hintStyle: const TextStyle(
-              fontSize: 22,
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: const BorderSide(
-                color: Colors.transparent,
+        Row(
+          children: [
+            Text(
+              widget.title,
+              style: context.textTheme.titleSmall?.copyWith(
+                fontSize: 12,
               ),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: BorderSide(
-                color: widget.borderColor ?? Colors.transparent,
+            Text(
+              " *",
+              style: context.textTheme.titleSmall?.copyWith(
+                color: Colors.red,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: BorderSide(
-                color: widget.borderColor ?? Colors.transparent,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: BorderSide(
-                color: widget.borderColor ?? Colors.transparent,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              borderSide: BorderSide(
-                color: widget.borderColor ?? Colors.transparent,
-              ),
-            ),
-            filled: true,
-            fillColor: widget.fillColor ?? const Color(0xFF352A24),
-            isDense: true,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: widget.horizontalPadding,
-              vertical: widget.verticalPadding,
-            ),
-            prefixIcon: widget.prefixIcon,
-            prefixIconConstraints: BoxConstraints(
-              maxWidth: widget.boxConstraints,
-              maxHeight: widget.boxConstraints,
-            ),
-            suffix: widget.suffix,
-          ),
+          ],
         ),
-        Positioned(
-          right: widget.suffixIcon is IconButton || widget.suffixIcon is PasswordSuffixIcon ? 6 : widget.suffixIconRightPadding,
-          top: widget.suffixIcon is IconButton || widget.suffixIcon is PasswordSuffixIcon ? 2 : widget.suffixIconTopPadding,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: widget.suffixIcon,
-          ),
+        const SizedBox(
+          height: 10,
+        ),
+        Stack(
+          children: [
+            TextFormField(
+              controller: widget.controller,
+              keyboardType: widget.keyboardType,
+              textInputAction: widget.textInputAction,
+              obscureText: widget.obscureText,
+              validator: validator,
+              enabled: true,
+              onTap: widget.onTap,
+              autofocus: widget.autoFocus,
+              readOnly: widget.readOnly,
+              inputFormatters: widget.inputFormatters,
+              onFieldSubmitted: widget.onFieldSubmitted,
+              maxLines: widget.maxLines,
+              onChanged: widget.onChange,
+              style: context.textTheme.titleSmall,
+              decoration: InputDecoration(
+                hintText: widget.label,
+                hintStyle: const TextStyle(
+                  color: AppColors.lightGrey,
+                  fontSize: 12,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(widget.borderRadius),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  ),
+                ),
+                filled: true,
+                fillColor: widget.fillColor ?? Colors.transparent,
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: widget.horizontalPadding,
+                  vertical: widget.verticalPadding,
+                ),
+                prefixIcon: widget.prefixIcon,
+                prefixIconConstraints: BoxConstraints(
+                  maxWidth: widget.boxConstraints,
+                  maxHeight: widget.boxConstraints,
+                ),
+                hoverColor: Colors.transparent,
+                suffix: widget.suffix,
+              ),
+            ),
+            Positioned(
+              right: widget.suffixIcon is IconButton || widget.suffixIcon is PasswordSuffixIcon ? 6 : widget.suffixIconRightPadding,
+              top: widget.suffixIcon is IconButton || widget.suffixIcon is PasswordSuffixIcon ? 2 : widget.suffixIconTopPadding,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: widget.suffixIcon,
+              ),
+            ),
+          ],
         ),
       ],
     );

@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 class Styles {
-
   static LinearGradient linearGradient = const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [AppColors.primaryGreen, AppColors.primaryLighter],
+    colors: [AppColors.primary, AppColors.secondary],
   );
 
   static LinearGradient scaffoldVerticalGradient = const LinearGradient(

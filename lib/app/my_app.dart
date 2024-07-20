@@ -20,7 +20,7 @@ class FinalAlertGuardWeb extends StatelessWidget {
             navigatorKey: NavRouter.navigationKey,
             title: 'Final Alert Guard',
             debugShowCheckedModeBanner: false,
-            theme: darkTheme,
+            theme: lightTheme,
             themeMode: ThemeMode.light,
             builder: (BuildContext context, Widget? child) {
               child = BotToastInit()(context, child);

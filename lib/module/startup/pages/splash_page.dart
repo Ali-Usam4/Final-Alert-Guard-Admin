@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../config/routes/nav_router.dart';
 import '../../../constants/asset_paths.dart';
 import '../../../core/di/service_locator.dart';
-import '../../../ui/widgets/base_scaffold.dart';
 import '../../authentication/pages/login_page.dart';
 import '../../user/cubits/user_cubit.dart';
 import '../cubit/startup_cubit.dart';
@@ -34,22 +32,10 @@ class _SplashPageState extends State<SplashPage> {
             NavRouter.pushAndRemoveUntil(context, const LoginPage());
           }
         },
-        child: BaseScaffold(
-          body: Stack(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 56.0),
-                  child: SvgPicture.asset(AssetPaths.svgLogo),
-                ),
-              ),
-              const Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Text('Splash Screen'),
-              ),
-            ],
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(
+            child: SizedBox(height: 200, width: 200, child: Image.asset(AssetPaths.logo)),
           ),
         ),
       ),

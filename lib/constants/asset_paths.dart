@@ -6,7 +6,7 @@ class AssetPaths {
 
   static const String logo = 'assets/images/ic_logo.png';
   static const String loginLogo = 'assets/images/ic_logo_login.png';
-  static const String dashboardLogo = 'assets/images/ic_logo_dashboard.png';
+  static const String homeLogo = 'assets/images/home_logo.png';
 
   ///* ================ Home ================ *///
 

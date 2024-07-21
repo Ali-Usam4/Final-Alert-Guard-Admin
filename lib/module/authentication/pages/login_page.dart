@@ -145,13 +145,16 @@
 //   }
 // }
 
+import 'package:final_alert_guard_admin/constants/asset_paths.dart';
 import 'package:final_alert_guard_admin/module/authentication/cubit/login/login_cubit.dart';
+import 'package:final_alert_guard_admin/module/home/pages/home_page.dart';
 import 'package:final_alert_guard_admin/ui/input/input_field.dart';
 import 'package:final_alert_guard_admin/ui/widgets/primary_button.dart';
 import 'package:final_alert_guard_admin/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../config/routes/nav_router.dart';
 import '../../../core/di/service_locator.dart';
 import '../../../ui/widgets/base_scaffold.dart';
 import '../../../utils/validators/validators.dart';
@@ -210,7 +213,7 @@ class _LoginPageViewState extends State<LoginPageView> {
                   Expanded(
                     flex: 1,
                     child: Image.asset(
-                      'assets/images/ic_logo_login.png',
+                      AssetPaths.loginLogo,
                       height: height * 0.3,
                     ),
                   ),
@@ -286,9 +289,10 @@ class _LoginPageViewState extends State<LoginPageView> {
         password: _passwordController.text,
       );
       //context.read<LoginCubit>().login(loginInput);
-      //NavRouter.pushAndRemoveUntil(context, const DashboardPage());
+      NavRouter.pushAndRemoveUntil(context, const HomePage());
     } else {
-      context.read<LoginCubit>().enableAutoValidateMode();
+      // context.read<LoginCubit>().enableAutoValidateMode();
+      NavRouter.pushAndRemoveUntil(context, const HomePage());
     }
   }
 }

@@ -1,13 +1,13 @@
 import 'package:final_alert_guard_admin/constants/app_colors.dart';
-import 'package:final_alert_guard_admin/module/home/pages/users_page.dart';
+import 'package:final_alert_guard_admin/module/users/pages/users_page.dart';
 import 'package:final_alert_guard_admin/ui/widgets/base_scaffold.dart';
 import 'package:final_alert_guard_admin/utils/extensions/extended_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/asset_paths.dart';
-import 'company_page.dart';
-import 'dashboard_page.dart';
+import '../../company/pages/company_page.dart';
+import '../../dashboard/pages/dashboard_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

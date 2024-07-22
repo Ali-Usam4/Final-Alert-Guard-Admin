@@ -24,7 +24,7 @@ class CardWidget extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 220,
+      height: 240,
       width: width * 0.13,
       child: Card(
         color: color,
@@ -81,6 +81,7 @@ class CardWidget extends StatelessWidget {
                         ),
                         child: Text(
                           'View All',
+                          textAlign: TextAlign.center,
                           style: context.textTheme.titleSmall?.copyWith(
                             color: Colors.white,
                             fontSize: 10,

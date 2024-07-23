@@ -14,4 +14,14 @@ class AssetPaths {
   static const String ic_company = 'assets/icons/ic_company.svg';
   static const String ic_users = 'assets/icons/ic_users.svg';
   static const String ic_logout = 'assets/icons/ic_logout.svg';
+
+  ///* ================ Social ================ *///
+
+  static const String ic_whatsapp = 'assets/icons/ic_whatsapp.svg';
+  static const String ic_twitter = 'assets/icons/ic_twitter.svg';
+  static const String ic_skype = 'assets/icons/ic_skype.svg';
+
+  ///* ================ Other ================ *///
+
+  static const String ic_copy = 'assets/icons/ic_copy.svg';
 }

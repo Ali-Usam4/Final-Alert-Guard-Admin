@@ -223,52 +223,55 @@ class _LoginPageViewState extends State<LoginPageView> {
                     child: Form(
                       key: _formKey,
                       autovalidateMode: state.isAutoValidate ? AutovalidateMode.always : AutovalidateMode.disabled,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Login',
-                            style: context.textTheme.titleLarge?.copyWith(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Login',
+                              style: context.textTheme.titleLarge?.copyWith(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: height * 0.04),
-                          InputField(
-                            controller: _emailController,
-                            label: 'Email',
-                            title: 'Email',
-                            textInputAction: TextInputAction.done,
-                            validator: (val) => Validators.email(val),
-                          ),
-                          SizedBox(
-                            height: height * 0.03,
-                          ),
-                          InputField(
-                            controller: _passwordController,
-                            label: 'Password',
-                            title: "Password",
-                            textInputAction: TextInputAction.done,
-                            suffixIcon: PasswordSuffixIcon(
-                              isPasswordVisible: !state.isPasswordHidden,
-                              onTap: () {
-                                context.read<LoginCubit>().toggleShowPassword();
-                              },
+                            SizedBox(height: height * 0.04),
+                            InputField(
+                              controller: _emailController,
+                              label: 'Email',
+                              title: 'Email',
+                              textInputAction: TextInputAction.done,
+                              validator: (val) => Validators.email(val),
                             ),
-                            validator: (value) => Validators.password(
-                              value,
+                            SizedBox(
+                              height: height * 0.03,
                             ),
-                            obscureText: state.isPasswordHidden,
-                          ),
-                          SizedBox(
-                            height: height * 0.04,
-                          ),
-                          PrimaryButton(
-                            onPressed: _onLoggedIn,
-                            title: 'Login',
-                          ),
-                        ],
+                            InputField(
+                              controller: _passwordController,
+                              label: 'Password',
+                              title: "Password",
+                              textInputAction: TextInputAction.done,
+                              suffixIcon: PasswordSuffixIcon(
+                                isPasswordVisible: !state.isPasswordHidden,
+                                onTap: () {
+                                  context.read<LoginCubit>().toggleShowPassword();
+                                },
+                              ),
+                              validator: (value) => Validators.password(
+                                value,
+                              ),
+                              obscureText: state.isPasswordHidden,
+                            ),
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            PrimaryButton(
+                              onPressed: _onLoggedIn,
+                              title: 'Login',
+                              width: 120,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )

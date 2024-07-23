@@ -11,6 +11,7 @@ class InputField extends StatefulWidget {
     required this.controller,
     required this.label,
     required this.title,
+    this.isRequired = true,
     required this.textInputAction,
     this.keyboardType = TextInputType.text,
     this.validator,
@@ -27,7 +28,7 @@ class InputField extends StatefulWidget {
     this.autoFocus = false,
     super.key,
     this.onChange,
-    this.borderColor = AppColors.secondary,
+    this.borderColor = AppColors.lightGrey,
     this.borderRadius = 8,
     this.fontSize = 24,
     this.boxConstraints = 44,
@@ -41,6 +42,7 @@ class InputField extends StatefulWidget {
   final TextEditingController controller;
   final String label;
   final String title;
+  final bool isRequired;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final FormFieldValidator<String>? validator;
@@ -86,12 +88,13 @@ class _InputFieldState extends State<InputField> {
                 fontSize: 12,
               ),
             ),
-            Text(
-              " *",
-              style: context.textTheme.titleSmall?.copyWith(
-                color: Colors.red,
+            if (widget.isRequired)
+              Text(
+                " *",
+                style: context.textTheme.titleSmall?.copyWith(
+                  color: Colors.red,
+                ),
               ),
-            ),
           ],
         ),
         const SizedBox(

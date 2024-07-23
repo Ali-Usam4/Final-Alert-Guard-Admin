@@ -120,7 +120,10 @@ class _CustomBarChartState extends State<CustomBarChart> {
                       value: value,
                       child: Text(
                         value,
-                        style: context.textTheme.titleSmall,
+                        style: context.textTheme.titleSmall?.copyWith(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     );
                   }).toList(),
@@ -129,6 +132,8 @@ class _CustomBarChartState extends State<CustomBarChart> {
                       selectedType = value!;
                     });
                   },
+                  underline: Container(),
+                  icon: const Icon(Icons.keyboard_arrow_down),
                 ),
                 ToggleButtons(
                   isSelected: [isMonthly, !isMonthly],
@@ -146,11 +151,13 @@ class _CustomBarChartState extends State<CustomBarChart> {
                       print(dateTimeRange);
                     }
                   },
-                  child: Text(
-                    dateRangeText,
-                    style: context.textTheme.titleSmall?.copyWith(
-                      fontSize: 10,
-                      overflow: TextOverflow.ellipsis,
+                  child: Expanded(
+                    child: Text(
+                      dateRangeText,
+                      style: context.textTheme.titleSmall?.copyWith(
+                        fontSize: 10,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ),

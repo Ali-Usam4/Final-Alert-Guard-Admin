@@ -43,6 +43,7 @@ class CardWidget extends StatelessWidget {
                       style: context.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
@@ -51,7 +52,12 @@ class CardWidget extends StatelessWidget {
               ),
               Text(
                 numbers,
-                style: context.textTheme.titleLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26),
+                style: context.textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 26,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Row(
                 children: [

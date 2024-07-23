@@ -24,4 +24,8 @@ class AssetPaths {
   ///* ================ Other ================ *///
 
   static const String ic_copy = 'assets/icons/ic_copy.svg';
+
+  ///* ================ Png ================ *///
+
+  static const String placeholder = 'assets/images/placeholder.jpg';
 }

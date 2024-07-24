@@ -13,9 +13,6 @@ class BlocDI extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider<DashboardCubit>(
-        //   create: (context) => DashboardCubit(),
-        // ),
         BlocProvider<AppCubit>(
           create: (context) => AppCubit(sl())..init(),
         ),

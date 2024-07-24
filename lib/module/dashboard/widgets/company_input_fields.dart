@@ -4,7 +4,24 @@ import '../../../ui/input/input_field.dart';
 import '../../../utils/validators/validators.dart';
 
 class CompanyInputFields extends StatelessWidget {
-  const CompanyInputFields({super.key});
+  final TextEditingController companyNameController;
+  final TextEditingController managerNameController;
+  final TextEditingController phoneNumberController;
+  final TextEditingController addressController;
+  final TextEditingController cityController;
+  final TextEditingController stateController;
+  final TextEditingController additionalInfoController;
+
+  const CompanyInputFields({
+    super.key,
+    required this.companyNameController,
+    required this.managerNameController,
+    required this.phoneNumberController,
+    required this.addressController,
+    required this.cityController,
+    required this.stateController,
+    required this.additionalInfoController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +32,7 @@ class CompanyInputFields extends StatelessWidget {
           children: [
             Expanded(
               child: InputField(
-                controller: TextEditingController(),
+                controller: companyNameController,
                 label: 'Company',
                 title: 'Company Name',
                 textInputAction: TextInputAction.next,
@@ -27,7 +44,7 @@ class CompanyInputFields extends StatelessWidget {
             ),
             Expanded(
               child: InputField(
-                controller: TextEditingController(),
+                controller: managerNameController,
                 label: 'Name',
                 title: 'Manager Name',
                 textInputAction: TextInputAction.next,
@@ -44,7 +61,7 @@ class CompanyInputFields extends StatelessWidget {
           children: [
             Expanded(
               child: InputField(
-                controller: TextEditingController(),
+                controller: phoneNumberController,
                 label: 'Phone',
                 title: 'Phone',
                 textInputAction: TextInputAction.next,
@@ -56,7 +73,7 @@ class CompanyInputFields extends StatelessWidget {
             ),
             Expanded(
               child: InputField(
-                controller: TextEditingController(),
+                controller: addressController,
                 label: 'Address',
                 title: 'Address',
                 textInputAction: TextInputAction.next,
@@ -73,7 +90,7 @@ class CompanyInputFields extends StatelessWidget {
           children: [
             Expanded(
               child: InputField(
-                controller: TextEditingController(),
+                controller: cityController,
                 label: 'City',
                 title: 'City',
                 textInputAction: TextInputAction.next,
@@ -85,7 +102,7 @@ class CompanyInputFields extends StatelessWidget {
             ),
             Expanded(
               child: InputField(
-                controller: TextEditingController(),
+                controller: stateController,
                 label: 'State',
                 title: 'State',
                 textInputAction: TextInputAction.next,
@@ -98,7 +115,7 @@ class CompanyInputFields extends StatelessWidget {
           height: 30,
         ),
         InputField(
-          controller: TextEditingController(),
+          controller: additionalInfoController,
           label: 'Type here',
           title: 'Additional Note',
           isRequired: false,

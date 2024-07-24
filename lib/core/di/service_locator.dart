@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../config/environment.dart';
 import '../../module/authentication/repository/auth_repository.dart';
 import '../../module/authentication/repository/session_repository.dart';
+import '../../module/dashboard/repository/create_pin_repository.dart';
 import '../../module/user/repository/user_account_repository.dart';
 import '../network/dio_client.dart';
 import '../security/secured_auth_storage.dart';
@@ -46,6 +48,12 @@ void setupLocator(Environment environment) async {
       dioClient: sl(),
       userAccountRepository: sl(),
       sessionRepository: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<CreatePinRepository>(
+    () => CreatePinRepository(
+      firestore: FirebaseFirestore.instance,
     ),
   );
 }

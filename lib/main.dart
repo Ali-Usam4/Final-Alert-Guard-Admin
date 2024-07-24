@@ -15,6 +15,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   /// =============== App initialization ==================
+  await initFirebase();
   await initApp(Environment.fromEnv(AppEnv.dev));
   runApp(const FinalAlertGuardWeb());
 }

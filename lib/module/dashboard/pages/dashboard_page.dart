@@ -42,97 +42,101 @@ class _DashboardPageState extends State<DashboardPage> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return BaseScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        actions: [
+          SizedBox(
+            width: width * 0.16,
+            child: TextField(
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                hoverColor: Colors.transparent,
+                hintStyle: context.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                  color: AppColors.lightGrey,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(color: Colors.transparent),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(color: Colors.transparent),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(color: Colors.transparent),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: const BorderSide(color: Colors.transparent),
+                ),
+                suffixIcon: const Icon(
+                  Icons.search,
+                  color: AppColors.lightGrey,
+                ),
+                hintText: 'Try searching',
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Container(
+            height: 44,
+            padding: const EdgeInsets.fromLTRB(8, 5, 4, 5),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Image.asset(
+                    'assets/images/profile.png',
+                    height: 30,
+                  ),
+                ),
+                const SizedBox(
+                  width: 6,
+                ),
+                Text(
+                  "ADMIN",
+                  style: context.textTheme.titleSmall?.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  width: 6,
+                ),
+                Switch(
+                  value: isEditModeEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      isEditModeEnabled = value;
+                    });
+                  },
+                  activeColor: Colors.white,
+                  activeTrackColor: AppColors.primary,
+                  inactiveTrackColor: AppColors.secondary,
+                  inactiveThumbColor: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: 24,
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.01),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: width * 0.16,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      hoverColor: Colors.transparent,
-                      hintStyle: context.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: AppColors.lightGrey,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(color: Colors.transparent),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(color: Colors.transparent),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(color: Colors.transparent),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: const BorderSide(color: Colors.transparent),
-                      ),
-                      suffixIcon: const Icon(
-                        Icons.search,
-                        color: AppColors.lightGrey,
-                      ),
-                      hintText: 'Try searching',
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Image.asset(
-                          'assets/images/profile.png',
-                          height: 30,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        "ADMIN",
-                        style: context.textTheme.titleSmall?.copyWith(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Switch(
-                        value: isEditModeEnabled,
-                        onChanged: (value) {
-                          setState(() {
-                            isEditModeEnabled = value;
-                          });
-                        },
-                        activeColor: Colors.white,
-                        activeTrackColor: AppColors.primary,
-                        inactiveTrackColor: AppColors.secondary,
-                        inactiveThumbColor: Colors.white,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
             const SizedBox(
               height: 20,
             ),

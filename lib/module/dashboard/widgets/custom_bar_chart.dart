@@ -152,11 +152,35 @@ class _CustomBarChartState extends State<CustomBarChart> {
                     }
                   },
                   child: Expanded(
-                    child: Text(
-                      dateRangeText,
-                      style: context.textTheme.titleSmall?.copyWith(
-                        fontSize: 10,
-                        overflow: TextOverflow.ellipsis,
+                    child: Container(
+                      padding: const EdgeInsets.all(6) +
+                          const EdgeInsets.only(
+                            left: 4,
+                          ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: AppColors.lightGrey,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            dateRangeText,
+                            style: context.textTheme.titleSmall?.copyWith(
+                              fontSize: 10,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down,
+                            size: 20,
+                            color: AppColors.secondary,
+                          ),
+                        ],
                       ),
                     ),
                   ),

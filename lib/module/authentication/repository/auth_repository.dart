@@ -1,76 +1,60 @@
-import 'package:dio/dio.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_alert_guard_admin/module/authentication/models/login_input.dart';
+import 'package:final_alert_guard_admin/module/authentication/repository/session_repository.dart';
+import 'package:final_alert_guard_admin/module/user/models/user_model.dart';
 
-import '../../../../constants/api_endpoints.dart';
-import '../../../../core/exceptions/api_error.dart';
-import '../../../../core/network/api_result.dart';
-import '../../../../core/network/dio_client.dart';
-import '../../../../utils/logger/logger.dart';
-import '../../user/models/user_model.dart';
 import '../../user/repository/user_account_repository.dart';
-import '../models/auth_response.dart';
-import '../models/login_input.dart';
-import '../models/signup_input.dart';
-import 'session_repository.dart';
 
 class AuthRepository {
-  final DioClient _dioClient;
+  final FirebaseFirestore firestore;
   final UserAccountRepository _userAccountRepository;
   final SessionRepository _sessionRepository;
 
-  final _log = logger(AuthRepository);
-
   AuthRepository({
-    required DioClient dioClient,
+    required this.firestore,
     required UserAccountRepository userAccountRepository,
     required SessionRepository sessionRepository,
-  })  : _dioClient = dioClient,
-        _sessionRepository = sessionRepository,
+  })  : _sessionRepository = sessionRepository,
         _userAccountRepository = userAccountRepository;
 
-  Future<AuthResponse> login(LoginInput loginInput) async {
+  final String adminDocId = "AP9fBvgSWPCkVKLPfEwe";
+
+  Future<UserModel?> login(LoginInput loginInput) async {
     try {
-      var response = await _dioClient.post(Endpoints.login, data: loginInput.toFormData());
-      AuthResponse authResponse = AuthResponse.fromJson(response.data);
-      UserModel userModel = authResponse.data;
-      await _userAccountRepository.saveUserInDb(userModel);
-      await _sessionRepository.setToken(authResponse.token);
-      _dioClient.setToken(authResponse.token);
-      await _sessionRepository.setLoggedIn(true);
-      return authResponse;
-    } on DioException catch (e, stackTrace) {
-      _log.e(e, stackTrace: stackTrace);
-      throw ApiError.fromDioException(e);
-    } on TypeError catch (e, stackTrace) {
-      _log.e(stackTrace);
-      throw ApiError(message: '$e', code: 0);
+      QuerySnapshot snapshot =
+          await firestore.collection('Admin').where('email', isEqualTo: loginInput.email).where('password', isEqualTo: loginInput.password).get();
+
+      if (snapshot.docs.isNotEmpty) {
+        UserModel userModel = UserModel.fromJson(snapshot.docs.first.data() as Map<String, dynamic>);
+        await _userAccountRepository.saveUserInDb(userModel);
+        await _sessionRepository.setLoggedIn(true);
+        return userModel;
+      } else {
+        return null;
+      }
     } catch (e) {
-      _log.e(e);
-      throw ApiError(message: '$e', code: 0);
+      throw Exception('Error logging in: $e');
     }
   }
 
-  Future<AuthResponse> signup(SignupInput signupInput) async {
+  Future<void> updateEditMode(bool isEditMode) async {
     try {
-      var response = await _dioClient.post(Endpoints.signup, data: signupInput.toFormData());
-      if (response.data['result'] == ApiResult.success) {
-        AuthResponse authResponse = AuthResponse.fromJson(response.data);
-        UserModel userModel = authResponse.data;
-        await _userAccountRepository.saveUserInDb(userModel);
-        await _sessionRepository.setToken(authResponse.token);
-        _dioClient.setToken(authResponse.token);
-        await _sessionRepository.setLoggedIn(true);
-        return authResponse;
-      }
-      throw response.data['message'];
-    } on DioException catch (e, stackTrace) {
-      _log.e(e, stackTrace: stackTrace);
-      throw ApiError.fromDioException(e);
-    } on TypeError catch (e) {
-      _log.e(e.stackTrace);
-      throw ApiError(message: '$e', code: 0);
+      await firestore.collection('Admin').doc(adminDocId).update({'editMode': isEditMode});
     } catch (e) {
-      _log.e(e);
-      throw ApiError(message: '$e', code: 0);
+      throw Exception('Error updating edit mode: $e');
+    }
+  }
+
+  Future<void> updateUser() async {
+    try {
+      DocumentSnapshot snapshot = await firestore.collection('Admin').doc(adminDocId).get();
+      if (snapshot.exists) {
+        UserModel userModel = UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+        await _userAccountRepository.saveUserInDb(userModel);
+        await _sessionRepository.setLoggedIn(true);
+      }
+    } catch (e) {
+      throw Exception('Error fetching admin: $e');
     }
   }
 }

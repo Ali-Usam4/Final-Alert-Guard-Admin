@@ -155,32 +155,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/routes/nav_router.dart';
-import '../../../core/di/service_locator.dart';
 import '../../../ui/widgets/base_scaffold.dart';
+import '../../../ui/widgets/toast_loader.dart';
 import '../../../utils/validators/validators.dart';
+import '../../user/cubits/user_cubit.dart';
 import '../models/login_input.dart';
 import '../widget/password_suffix_widget.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(authRepository: sl()),
-      child: const LoginPageView(),
-    );
-  }
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class LoginPageView extends StatefulWidget {
-  const LoginPageView({super.key});
-
-  @override
-  State<LoginPageView> createState() => _LoginPageViewState();
-}
-
-class _LoginPageViewState extends State<LoginPageView> {
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -193,8 +182,16 @@ class _LoginPageViewState extends State<LoginPageView> {
 
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        /**/
-        // TODO: implement listener
+        if (state.loginStatus == LoginStatus.loading) {
+          ToastLoader.show();
+        } else if (state.loginStatus == LoginStatus.success) {
+          context.read<UserCubit>().loadUser();
+          ToastLoader.remove();
+          NavRouter.pushAndRemoveUntil(context, const HomePage());
+        } else if (state.loginStatus == LoginStatus.error) {
+          ToastLoader.remove();
+          context.showSnackBar(state.errorMessage);
+        }
       },
       builder: (context, state) {
         return BaseScaffold(
@@ -291,11 +288,11 @@ class _LoginPageViewState extends State<LoginPageView> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
-      //context.read<LoginCubit>().login(loginInput);
-      NavRouter.pushAndRemoveUntil(context, const HomePage());
+      context.read<LoginCubit>().login(loginInput);
+      //NavRouter.pushAndRemoveUntil(context, const HomePage());
     } else {
-      // context.read<LoginCubit>().enableAutoValidateMode();
-      NavRouter.pushAndRemoveUntil(context, const HomePage());
+      context.read<LoginCubit>().enableAutoValidateMode();
+      //NavRouter.pushAndRemoveUntil(context, const HomePage());
     }
   }
 }

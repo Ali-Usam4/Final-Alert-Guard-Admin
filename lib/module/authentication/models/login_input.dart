@@ -14,14 +14,10 @@ class LoginInput {
   Map<String, dynamic> toJson() => {
         "email": email,
         "password": password,
-        "deviceId": fcmToken,
-        "role": 'user',
       };
 
   FormData toFormData() => FormData.fromMap({
         'email': email,
         'password': password,
-        'deviceId': fcmToken,
-        'role': 'user',
       });
 }

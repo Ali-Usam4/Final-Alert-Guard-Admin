@@ -7,6 +7,7 @@ class CompanyPinModel {
   final String state;
   final String additionalInfo;
   final String pin;
+  final DateTime dateTime;
 
   CompanyPinModel({
     required this.companyName,
@@ -17,6 +18,7 @@ class CompanyPinModel {
     required this.state,
     required this.additionalInfo,
     required this.pin,
+    required this.dateTime,
   });
 
   Map<String, dynamic> toJson() {
@@ -29,6 +31,7 @@ class CompanyPinModel {
       'state': state,
       'additionalInfo': additionalInfo,
       'pin': pin,
+      'dateTime': dateTime.toIso8601String(),
     };
   }
 
@@ -42,6 +45,7 @@ class CompanyPinModel {
       state: map['state'],
       additionalInfo: map['additionalInfo'],
       pin: map['pin'],
+      dateTime: DateTime.parse(map['dateTime']),
     );
   }
 }
@@ -53,6 +57,7 @@ class UserPinModel {
   final String city;
   final String state;
   final String pin;
+  final DateTime dateTime;
 
   UserPinModel({
     required this.name,
@@ -61,6 +66,7 @@ class UserPinModel {
     required this.city,
     required this.state,
     required this.pin,
+    required this.dateTime,
   });
 
   Map<String, dynamic> toJson() {
@@ -71,6 +77,7 @@ class UserPinModel {
       'city': city,
       'state': state,
       'pin': pin,
+      'dateTime': dateTime.toIso8601String(),
     };
   }
 
@@ -82,6 +89,7 @@ class UserPinModel {
       city: map['city'],
       state: map['state'],
       pin: map['pin'],
+      dateTime: DateTime.parse(map['dateTime']),
     );
   }
 }

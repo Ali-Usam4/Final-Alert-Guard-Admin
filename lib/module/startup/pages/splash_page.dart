@@ -1,3 +1,4 @@
+import 'package:final_alert_guard_admin/module/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
         listener: (context, state) {
           if (state.status == Status.authenticated) {
             context.read<UserCubit>().loadUser();
-            //NavRouter.pushAndRemoveUntil(context, const LoginPage());
+            NavRouter.pushAndRemoveUntil(context, const HomePage());
           } else if (state.status == Status.unauthenticated) {
             NavRouter.pushAndRemoveUntil(context, const LoginPage());
           }

@@ -45,9 +45,9 @@ void setupLocator(Environment environment) async {
 
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepository(
-      dioClient: sl(),
-      userAccountRepository: sl(),
       sessionRepository: sl(),
+      userAccountRepository: sl(),
+      firestore: FirebaseFirestore.instance,
     ),
   );
 

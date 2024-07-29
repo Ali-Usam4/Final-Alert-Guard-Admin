@@ -1,4 +1,4 @@
-import '../model/response_model.dart';
+import '../model/pin_model.dart';
 
 abstract class PinRepositoryI {
   Future<void> addCompanyPin(CompanyPinModel companyPin);

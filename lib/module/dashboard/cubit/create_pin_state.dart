@@ -1,21 +1,35 @@
 part of 'create_pin_cubit.dart';
 
-abstract class CreatePinState extends Equatable {
-  @override
-  List<Object?> get props => [];
+enum CreatePinStatus {
+  initial,
+  loading,
+  success,
+  failure,
 }
 
-class CreatePinInitial extends CreatePinState {}
+class CreatePinState {
+  final CreatePinStatus status;
+  final String message;
 
-class CreatePinLoading extends CreatePinState {}
+  CreatePinState({
+    required this.status,
+    required this.message,
+  });
 
-class CreatePinSuccess extends CreatePinState {}
+  factory CreatePinState.initial() {
+    return CreatePinState(
+      status: CreatePinStatus.initial,
+      message: '',
+    );
+  }
 
-class CreatePinFailure extends CreatePinState {
-  final String error;
-
-  CreatePinFailure(this.error);
-
-  @override
-  List<Object?> get props => [error];
+  CreatePinState copyWith({
+    CreatePinStatus? status,
+    String? message,
+  }) {
+    return CreatePinState(
+      status: status ?? this.status,
+      message: message ?? this.message,
+    );
+  }
 }

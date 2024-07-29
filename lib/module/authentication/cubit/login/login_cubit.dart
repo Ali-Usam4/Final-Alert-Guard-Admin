@@ -1,10 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:final_alert_guard_admin/module/authentication/models/login_input.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/exceptions/api_error.dart';
 import '../../../../../utils/logger/logger.dart';
-import '../../models/auth_response.dart';
-import '../../models/login_input.dart';
 import '../../repository/auth_repository.dart';
 
 part 'login_state.dart';
@@ -23,11 +21,6 @@ class LoginCubit extends Cubit<LoginState> {
         loginStatus: LoginStatus.initial,
       ));
 
-  void toggleShowConfirmPassword() => emit(state.copyWith(
-        isConfirmPasswordHidden: !state.isConfirmPasswordHidden,
-        loginStatus: LoginStatus.initial,
-      ));
-
   void enableAutoValidateMode() => emit(state.copyWith(
         isAutoValidate: true,
         loginStatus: LoginStatus.initial,
@@ -35,21 +28,26 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login(LoginInput loginInput) async {
     emit(state.copyWith(loginStatus: LoginStatus.loading));
-
     try {
-      //loginInput.fcmToken = await sl<CloudMessagingApi>().getFcmToken() ?? '';
-      //_log.e('fcm token is :: ${loginInput.fcmToken}');
-      AuthResponse authResponse = await _authRepository.login(loginInput);
-      if (authResponse.result == 'success') {
+      final user = await _authRepository.login(loginInput);
+      if (user != null) {
         emit(state.copyWith(loginStatus: LoginStatus.success));
       } else {
-        emit(state.copyWith(
-            loginStatus: LoginStatus.error,
-            errorMessage: authResponse.message));
+        emit(state.copyWith(loginStatus: LoginStatus.error, errorMessage: 'Invalid email or password'));
       }
-    } on ApiError catch (e) {
-      emit(state.copyWith(
-          loginStatus: LoginStatus.error, errorMessage: e.message));
+    } catch (e) {
+      emit(state.copyWith(loginStatus: LoginStatus.error, errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> updateEditMode(bool isEditMode) async {
+    emit(state.copyWith(loginStatus: LoginStatus.loading));
+    try {
+      await _authRepository.updateEditMode(isEditMode);
+      await _authRepository.updateUser();
+      emit(state.copyWith(loginStatus: LoginStatus.success));
+    } catch (e) {
+      emit(state.copyWith(loginStatus: LoginStatus.error, errorMessage: e.toString()));
     }
   }
 }
